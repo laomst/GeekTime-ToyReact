@@ -11,15 +11,15 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.tsx?$/i,
+                test: /\.jsx?$/i,
                 use: [{
                     loader: 'babel-loader',
                     options: {
                         presets: ['@babel/preset-env'],
-                        plugins: [
+                        plugins: [[
                             '@babel/plugin-transform-react-jsx',
                             {pragma: 'ToyReact.createElement'}
-                        ]
+                        ]]
                     }
                 }],
                 exclude: /node_modules/
