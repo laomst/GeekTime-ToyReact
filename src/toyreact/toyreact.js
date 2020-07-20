@@ -16,6 +16,15 @@ export class Component {
   }
 }
 
+function getDom(vdom) {
+  if (vdom instanceof Component) {
+    vdom = vdom.render()
+    return getDom(vdom)
+  } else {
+    return vdom
+  }
+}
+
 /**
  * 因为是基于实dom的，所以最后的挂载动作和渲染动作最终都会递归到这个类的实例上
  */
@@ -33,8 +42,10 @@ class ElementWrapper extends Component {
     this.root.setAttribute(name, value)
   }
 
-  appendChild(vchild) {
-    vchild.mount(this.render())
+  appendChild(child) {
+    // 我们这里操作的是实际的dom，所以要获取到真正的dom
+    child = getDom(child)
+    this.render().appendChild(child)
   }
 
   mount(parent) {
@@ -50,6 +61,10 @@ class TextWrapper extends Component {
 
   render() {
     return this.root
+  }
+
+  appendChild(child) {
+    // don't do anything
   }
 
   mount(parent) {

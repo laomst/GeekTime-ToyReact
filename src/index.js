@@ -15,6 +15,10 @@ class MyComponent extends Component{
 
 let a = <div name="a" id="ida">
   <MyComponent name="child">
+    <div>Hello </div>
+    <div>
+      <span>Toy-React</span>
+    </div>
   </MyComponent>
 </div>
 
